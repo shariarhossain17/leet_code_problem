@@ -15,42 +15,23 @@ using namespace std;
 
 void solve()
 {
+    string ab;
+    cin >> ab;
 
-    string a, b;
-    cin >> a >> b;
-
-    int i = -0, j = 0;
-
-    // if (a.size() < b.size())
-    // {
-    //     cout << "false";
-    //     return;
-    // }
-
-    while (i < a.size())
+    for (int i = 1; i < ab.size(); i++)
     {
-        string c = "0";
+        string a = ab.substr(0, i);
+        string b = ab.substr(i);
 
-        if (b[j] > '0' and b[j] <= '9')
+        if (b[0] != '0' && stoi(a) < stoi(b))
         {
-            c += b[j];
-            j++;
-        }
-        else if (a[i + stoi(c) - 1] == b[j])
-        {
-            i++;
-            j++;
-            c = "0";
-        }
-        else
-        {
-            cout << "false";
+            cout << a << " " << b << "\n";
             return;
         }
     }
-
-    cout << "True";
+    cout << "-1\n";
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false);
