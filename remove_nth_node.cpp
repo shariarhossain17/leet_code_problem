@@ -97,6 +97,23 @@ Node *removeNth(Node *head, int sz)
     return head;
 }
 
+Node *optimal_removeNth(Node *head, int pos)
+{
+
+    Node *fast = head, *slow = head;
+    for (int i = 0; i < pos; i++)
+        fast = fast->next;
+    if (!fast)
+        return head->next;
+
+    while (fast->next)
+        slow = slow->next, fast = fast->next;
+
+    slow->next = slow->next->next;
+
+    return head;
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -116,10 +133,11 @@ int main()
     head = insert_val(n, v, head);
     int sz = cout_node(head);
 
-    if (sz - pos == 0)
-        head = removeHead(head);
+    // if (sz - pos == 0)
+    //     head = removeHead(head);
 
-    head = removeNth(head, sz - pos);
+    // head = removeNth(head, sz - pos);
+    head = optimal_removeNth(head, pos);
 
     print_list(head);
 
