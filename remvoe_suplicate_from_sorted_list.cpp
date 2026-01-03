@@ -85,6 +85,30 @@ Node *remove_duplicate_brute_force(Node *head)
     return new_head;
 }
 
+Node *remove_duplicate_optimal(Node *head)
+{
+    if (head == nullptr)
+        return head;
+
+    Node *cur = head;
+
+    while (cur->next != nullptr)
+    {
+        if (cur->val == cur->next->val)
+        {
+            Node *tmp = cur->next;
+            cur->next = tmp->next;
+            delete tmp;
+        }
+        else
+        {
+            cur = cur->next;
+        }
+    }
+
+    return head;
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -102,7 +126,9 @@ int main()
 
     head = insert_value(v, head);
 
-    head = remove_duplicate_brute_force(head);
+    // head = remove_duplicate_brute_force(head);
+
+    head = remove_duplicate_optimal(head);
 
     print_list(head);
 
