@@ -71,6 +71,23 @@ ListNode *reverse_linked_list(ListNode *head)
     return new_head;
 }
 
+ListNode *reverse_linked_list_using_loop(ListNode *head)
+{
+
+    ListNode *cur = head;
+    ListNode *prev = nullptr;
+
+    while (cur != nullptr)
+    {
+        ListNode *next_node = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = next_node;
+    }
+
+    return prev;
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -87,7 +104,8 @@ int main()
     ListNode *head = nullptr;
 
     head = insert_val(head, v);
-    head = reverse_linked_list(head);
+    // head = reverse_linked_list(head);
+    head = reverse_linked_list_using_loop(head);
 
     print_list(head);
 
