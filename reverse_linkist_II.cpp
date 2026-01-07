@@ -105,6 +105,32 @@ ListNode *reverse_linkList_II(ListNode *head, int a, int b)
     return head;
 }
 
+ListNode *reverse_linked_list_II_optimal(ListNode *head, int a, int b)
+{
+    ListNode *dummy = new ListNode(0);
+
+    dummy->next = head;
+
+    ListNode *prev = dummy;
+
+    for (int i = 1; i < a; i++)
+    {
+        prev = prev->next;
+    }
+
+    ListNode *cur = prev->next;
+
+    for (int i = 0; i < b - a; i++)
+    {
+        ListNode *tmp = cur->next;
+        cur->next = tmp->next;
+        tmp->next = prev->next;
+        prev->next = tmp;
+    }
+
+    return dummy->next;
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -121,7 +147,8 @@ int main()
 
     head = insert_val(head, v);
 
-    head = reverse_linkList_II(head, a, b);
+    // head = reverse_linkList_II(head, a, b);
+    head = reverse_linked_list_II_optimal(head, a, b);
 
     print_list(head);
 
