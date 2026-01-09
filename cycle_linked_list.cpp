@@ -57,64 +57,26 @@ void print_list(ListNode *head)
         cur = cur->next;
     }
 }
-ListNode *find_kth_node(ListNode *head, int k)
-{
-    while (head && k--)
-    {
-        head = head->next;
-    }
-    return head;
-}
 
-ListNode *reverse_list(ListNode *tmp)
+bool hasCycle(ListNode *head)
 {
-    ListNode *prev = nullptr;
 
-    while (tmp)
+    if (head == nullptr)
+        return false;
+
+    ListNode *slow = head, *fast = head;
+
+    while (fast != nullptr and fast->next != nullptr)
     {
-        ListNode *next = tmp->next;
-        tmp->next = prev;
-        prev = tmp;
-        tmp = next;
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
+
+            return true;
     }
 
-    return prev;
-}
-
-ListNode *reverse_k_group(ListNode *head, int k)
-{
-    ListNode *tmp = head, *next = nullptr, *prev = nullptr;
-
-    while (tmp != nullptr)
-    {
-        ListNode *kthNode = find_kth_node(tmp, k - 1); 
-
-        if (kthNode == nullptr)
-        {
-
-            if (prev)
-                prev->next = tmp;
-            break;
-        }
-
-        next = kthNode->next;
-        kthNode->next = nullptr;
-        reverse_list(tmp);
-
-        if (tmp == head)
-        {
-            head = kthNode;
-        }
-        else
-        {
-            prev->next = kthNode;
-        }
-
-        prev = tmp;
-        tmp = next;
-    }
-
-    return head;
+    return false;
 }
 
 int main()
@@ -132,7 +94,7 @@ int main()
     ListNode *head = nullptr;
 
     head = insert_val(head, v);
-    head = reverse_k_group(head, k);
+    bool ans = hasCycle(head);
 
     print_list(head);
 
