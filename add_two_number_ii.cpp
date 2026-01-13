@@ -101,7 +101,41 @@ ListNode *add_two_number(ListNode *list1, ListNode *list2)
 
     return head->next;
 }
+ListNode *add_two_number_optimize(ListNode *list1, ListNode *list2)
+{
+    ListNode *head = new ListNode(0);
 
+    ListNode *tmp = head;
+
+    int rem = 0;
+
+    while (list1 != nullptr or list2 != nullptr)
+    {
+        int sum = rem;
+
+        if (list1)
+        {
+            sum += list1->val;
+            list1 = list1->next;
+        }
+
+        if (list2)
+        {
+
+            sum += list2->val;
+            list2 = list2->next;
+        }
+
+        tmp->next = new ListNode(sum % 10);
+        rem = sum / 10;
+        tmp = tmp->next;
+    }
+
+    if (rem > 0)
+        tmp->next = new ListNode(rem);
+
+    return head->next;
+}
 ListNode *reverseList(ListNode *head)
 {
 
