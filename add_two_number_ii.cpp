@@ -136,6 +136,54 @@ ListNode *add_two_number_optimize(ListNode *list1, ListNode *list2)
 
     return head->next;
 }
+ListNode *add_two_number_better(ListNode *list1, ListNode *list2)
+{
+    ListNode *dummy = new ListNode(0);
+    ListNode *tmp = dummy;
+
+    stack<int> st1, st2;
+
+    while (list1 != nullptr or list2 != nullptr)
+    {
+        if (list1)
+        {
+            st1.push(list1->val);
+            list1 = list1->next;
+        }
+        if (list2)
+        {
+            st2.push(list2->val);
+            list2 = list2->next;
+        }
+    }
+
+    int rem = 0;
+
+    while (!st1.empty() or !st2.empty())
+    {
+        int sum = rem;
+
+        if (!st1.empty())
+        {
+            sum += st1.top();
+            st1.pop();
+        }
+        if (!st2.empty())
+        {
+            sum += st2.top();
+            st2.pop();
+        }
+
+        tmp->next = new ListNode(sum % 10);
+        tmp = tmp->next;
+        rem = sum / 10;
+    }
+
+    if (rem)
+        tmp->next = new ListNode(rem);
+
+    return dummy->next;
+}
 ListNode *reverseList(ListNode *head)
 {
 
@@ -177,12 +225,15 @@ int main()
     list1 = insert_val(list1, v);
     list2 = insert_val(list2, v2);
 
-    list1 = reverseList(list1);
-    list2 = reverseList(list2);
+    // list1 = reverseList(list1);
+    // list2 = reverseList(list2);
 
-    ListNode *head = add_two_number(list1, list2);
+    // ListNode *head = add_two_number(list1, list2);
 
-    head = reverseList(head);
+    // head = reverseList(head);
+
+    ListNode *head = add_two_number_better(list1, list2);
+
     print_list(list1);
     cout << endl;
     print_list(list2);
