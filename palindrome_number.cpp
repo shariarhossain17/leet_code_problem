@@ -19,7 +19,7 @@ int main()
     }
     bool state = x == y ? 1 : 0;
 
-    return state;
+    cout << state << endl;
 
     return 0;
 }
