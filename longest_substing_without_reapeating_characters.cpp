@@ -41,6 +41,53 @@ void solve()
 
     cout << ans << endl;
 }
+
+void optimal()
+{
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    unordered_map<char, int> mp;
+
+    int left = 0, j = 0, ans = 0;
+    for (int right = 0; right < n; right++)
+    {
+        if (mp.count(s[right]) and mp[s[right]] >= left)
+        {
+            left = mp[s[right]] + 1;
+        }
+        mp[s[right]] = right;
+
+        ans = max(ans, right - left + 1);
+    }
+    cout << ans << endl;
+}
+void better()
+{
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    vector<char> hash(256, -1);
+
+    int left = 0, j = 0, ans = 0;
+    for (int right = 0; right < n; right++)
+    {
+
+        char c = s[right];
+        if (hash[c] >= left)
+        {
+            left = hash[c] + 1;
+        }
+        hash[c] = right;
+
+        ans = max(ans, right - left + 1);
+    }
+    cout << ans << endl;
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -49,7 +96,7 @@ int main()
     cin >> t;
     while (t--)
     {
-        solve();
+        better();
     }
     return 0;
 }
