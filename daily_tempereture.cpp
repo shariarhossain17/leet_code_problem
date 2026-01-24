@@ -26,6 +26,44 @@ public:
         for (auto i : ans)
             cout << i << " ";
     }
+
+    void solve_using_optimal(vector<int> &v)
+    {
+        int n = v.size();
+
+        vector<int> ans(n, 0);
+
+        stack<pair<int, int>> st;
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+            if (st.empty() or v[i] < st.top().first)
+            {
+                if (st.empty())
+                    ans[i] = 0;
+                else
+                    ans[i] = 1;
+                st.push({v[i], i});
+            }
+            else
+            {
+                while (!st.empty() and st.top().first <= v[i])
+                {
+                    st.pop();
+                }
+
+                if (!st.empty())
+                    ans[i] = st.top().second - i;
+                else
+                    ans[i] = 0;
+
+                st.push({v[i], i});
+            }
+        }
+
+        for (auto i : ans)
+            cout << i << " ";
+    }
 };
 int main()
 {
@@ -40,7 +78,8 @@ int main()
         cin >> v[i];
 
     Solution sol;
-    sol.solve_using_brute_force(v);
+    // sol.solve_using_brute_force(v);
+    sol.solve_using_optimal(v);
 
     return 0;
 }
