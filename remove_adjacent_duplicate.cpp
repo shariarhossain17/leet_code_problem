@@ -66,7 +66,8 @@ int main()
     cin >> s;
 
     Solution Sol;
-    // Sol.remove_duplicate_better(s);
-    Sol.remove_duplicate_brute_force(s);
+    // // Sol.remove_duplicate_better(s);
+    // Sol.remove_duplicate_brute_force(s);
+
     return 0;
 }
