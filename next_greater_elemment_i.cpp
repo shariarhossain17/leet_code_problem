@@ -41,6 +41,41 @@ public:
         for (auto i : ans)
             cout << i << " ";
     }
+    void solved_using_brute_better(vector<int> &nums1, vector<int> &nums2)
+    {
+
+        int m = nums2.size();
+
+        vector<int> ans;
+
+        stack<int> st;
+        map<int, int> mp;
+
+        for (int i = 0; i < m; i++)
+        {
+
+            while (!st.empty() and nums2[i] > st.top())
+            {
+                mp[st.top()] = nums2[i];
+                st.pop();
+            };
+
+            st.push(nums2[i]);
+        }
+
+        while (!st.empty())
+        {
+            mp[st.top()] = -1;
+
+            st.pop();
+        }
+
+        for (int i : nums1)
+            ans.push_back(mp[i]);
+
+        for (auto i : ans)
+            cout << i << " ";
+    }
 };
 int main()
 {
@@ -49,7 +84,7 @@ int main()
     int n, m;
     cin >> n >> m;
 
-    vector<int> v(n), v2(n);
+    vector<int> v(n), v2(m);
     for (int i = 0; i < n; i++)
     {
         cin >> v[i];
@@ -60,7 +95,8 @@ int main()
     }
 
     Solution sol;
-    sol.solved_using_brute_force(v, v2);
+
+    sol.solved_using_brute_better(v, v2);
 
     return 0;
 }
