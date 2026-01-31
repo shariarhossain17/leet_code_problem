@@ -19,10 +19,7 @@ public:
             while (!st.empty() and nums[st.top()] < nums[i % n])
             {
 
-                cout << i << endl;
-                return;
-
-                res[st.top()] = nums[i % n];
+                            res[st.top()] = nums[i % n];
                 st.pop();
             }
 
