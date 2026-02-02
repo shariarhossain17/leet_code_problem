@@ -39,13 +39,17 @@ public:
             while (!st.empty() && heights[st.top()] > heights[i])
             {
                 int height = heights[st.top()];
+
+                cout << height << endl;
                 st.pop();
 
                 int width;
                 if (st.empty())
                     width = i;
                 else
+                {
                     width = i - st.top() - 1;
+                }
 
                 ans = max(ans, height * width);
             }
