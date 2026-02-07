@@ -1,1 +1,2 @@
-  // cout << width << endl;
+
+            if (i + 1 >= k)

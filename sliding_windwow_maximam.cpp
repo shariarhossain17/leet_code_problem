@@ -27,6 +27,30 @@ public:
         for (auto i : ans)
             cout << i << " ";
     }
+    void maxSlidingWindowOptimal(vector<int> &nums, int k = 3)
+    {
+        int n = nums.size();
+
+        vector<int> ans;
+
+        deque<int> dq;
+
+        int start = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (!dq.empty() && dq.front() <= i - k)
+                dq.pop_front();
+            while (!dq.empty() && nums[dq.back()] <= nums[i])
+                dq.pop_back();
+
+            dq.push_back(i);
+            if (i >= k - 1)
+                ans.push_back(nums[dq.front()]);
+        }
+
+        for (auto i : ans)
+            cout << i << " ";
+    }
 };
 int main()
 {
@@ -43,7 +67,7 @@ int main()
 
     Solution sol;
 
-    sol.maxSlidingWindowBruteForce(v);
+    sol.maxSlidingWindowOptimal(v);
 
     return 0;
 }
