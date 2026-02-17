@@ -47,10 +47,12 @@ void solve()
 
     vector<int> v(n);
 
+    // take input
+
     for (int i = 0; i < n; i++)
         cin >> v[i];
 
-    sol.isTrionic(v);
+    sol.isTrionicDii(v);
 }
 int main()
 {
