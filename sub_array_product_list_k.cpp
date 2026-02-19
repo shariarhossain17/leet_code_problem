@@ -4,7 +4,7 @@ using namespace std;
 class Solution
 {
 public:
-    void numSubarrayProductLessThanK(vector<int> &nums, int k)
+    int numSubarrayProductLessThanK(vector<int> &nums, int k)
     {
 
         int n = nums.size();
@@ -25,7 +25,7 @@ public:
             cnt += (j - i + 1);
         }
 
-        cout << cnt << endl;
+        return cnt;
     }
 };
 int main()
@@ -43,7 +43,7 @@ int main()
 
     Solution Sol;
 
-    Sol.numSubarrayProductLessThanK(ar, k);
+    cout << Sol.numSubarrayProductLessThanK(ar, k) << endl;
 
     return 0;
 }
